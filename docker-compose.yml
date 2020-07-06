@@ -1,0 +1,37 @@
+version: '2.3'
+
+services:
+
+  base:
+    image: library/postgres:latest
+    env_file:
+      - .env
+
+  db:
+    extends:
+      service: base
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+    - "54321:5432"
+
+  assignment_base:
+    extends:
+      service: base
+    environment:
+      PGPASSWORD: $POSTGRES_PASSWORD
+    volumes:
+      - ./run.sh:/run.sh
+    entrypoint: "/bin/sh run.sh"
+
+  assignment_1:
+    extends:
+      service: assignment_base
+    links:
+      - db
+    volumes:
+      - ./accessing-the-database/sql:/sql
+
+
