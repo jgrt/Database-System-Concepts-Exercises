@@ -34,4 +34,12 @@ services:
     volumes:
       - ./accessing-the-database/sql:/sql
 
+  assignment_2:
+    extends:
+      service: assignment_base
+    links:
+      - db
+    volumes:
+      - ./basic-sql/sql:/sql
+
 
