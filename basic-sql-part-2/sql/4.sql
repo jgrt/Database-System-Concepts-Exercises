@@ -1,15 +1,12 @@
-WITH actor_id AS (
-	SELECT
+WITH never_acted as (
+	select
 		aid
-	FROM actors
-	WHERE
-		name = 'Charlie Chaplin'
+	from actors
+	EXCEPT
+		select
+			ar.aid
+		from actor_role ar
+		INNER JOIN actors a
+			ON ar.aid = a.aid
 )
-SELECT
-	m.title,
-	COUNT(r.rolename) no_of_role
-FROM movies m
-INNER JOIN actor_role r
-ON m.mid = r.mid
-WHERE r.aid IN (SELECT aid FROM actor_id)
-GROUP BY m.title;
+select name from actors where aid in (select aid from never_acted);
