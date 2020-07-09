@@ -13,11 +13,12 @@ services:
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./data:/var/lib/postgresql/data
     ports:
     - "54321:5432"
 
-  assignment_base:
+  assignment:
     extends:
       service: base
     environment:
@@ -26,18 +27,32 @@ services:
       - ./run.sh:/run.sh
     entrypoint: "/bin/sh run.sh"
 
-  assignment_1:
+  accessing-the-database:
     extends:
-      service: assignment_base
+      service: assignment
     links:
       - db
+    environment:
+      POSTGRES_DB: university
     volumes:
       - ./accessing-the-database/sql:/sql
 
-  assignment_2:
+  basic-sql-part-1:
     extends:
-      service: assignment_base
+      service: assignment
     links:
       - db
+    environment:
+      POSTGRES_DB: university
     volumes:
-      - ./basic-sql/sql:/sql
+      - ./basic-sql-part-1/sql:/sql
+
+  basic-sql-part-2:
+    extends:
+      service: assignment
+    links:
+      - db
+    environment:
+      POSTGRES_DB: movies
+    volumes:
+      - ./basic-sql-part-2/sql:/sql
