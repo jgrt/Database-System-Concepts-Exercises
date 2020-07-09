@@ -1,4 +1,4 @@
-##Basic SQL Part 1
+## Basic SQL Part 1
 1. Find the names of all the instructors from Biology department
 2. Find the names of courses in Computer science department which have 3 credits
 3. For the student with ID 12345 (or any other value), show all course_id and title of all courses registered for by the student.

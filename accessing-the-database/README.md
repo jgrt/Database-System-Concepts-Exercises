@@ -1,4 +1,4 @@
-**Accessing the Database:** 
+## Accessing the Database
 The first laboratory exercise is to connect to a database, populate it with data, and run very simple SQL queries.
 
 - In case a shared database is provided for course students, user accounts need to be created on the database. Otherwise, the lab should also cover setting up a database system. 
