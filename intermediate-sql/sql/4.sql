@@ -1,0 +1,1 @@
+SELECT * FROM course WHERE course_id LIKE '1%';
