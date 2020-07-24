@@ -66,3 +66,13 @@ services:
       POSTGRES_DB: university
     volumes:
       - ./intermediate-sql/sql:/sql
+
+  advanced-sql:
+    extends:
+      service: assignment
+    links:
+      - db
+    environment:
+      POSTGRES_DB: university
+    volumes:
+      - ./advanced-sql/sql:/sql
